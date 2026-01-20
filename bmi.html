@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .bmi-box {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="bmi-box">
+    <h2>BMI Calculator</h2>
+
+    <input type="number" id="weight" placeholder="Weight (kg)">
+    <input type="number" id="height" placeholder="Height (cm)">
+
+    <button onclick="calculateBMI()">Calculate BMI</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+function calculateBMI() {
+    const weight = document.getElementById("weight").value;
+    const heightCm = document.getElementById("height").value;
+
+    if (weight === "" || heightCm === "") {
+        document.getElementById("result").innerText = "Please enter all values";
+        return;
+    }
+
+    const heightM = heightCm / 100;
+    const bmi = (weight / (heightM * heightM)).toFixed(2);
+
+    let status = "";
+
+    if (bmi < 18.5) {
+        status = "Underweight";
+    } else if (bmi < 25) {
+        status = "Normal weight";
+    } else if (bmi < 30) {
+        status = "Overweight";
+    } else {
+        status = "Obese";
+    }
+
+    document.getElementById("result").innerText =
+        `BMI: ${bmi} (${status})`;
+}
+</script>
+
+</body>
+</html>
